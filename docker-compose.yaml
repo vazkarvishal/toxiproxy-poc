@@ -19,3 +19,11 @@ services:
     ports:
       - "8474:8474"
       - "8001:8000"
+
+  reverse:
+    build: ./reverse-proxy
+    ports:
+      - 80:80
+    volumes:
+      - ./reverse-proxy/html:/usr/share/nginx/html
+      - ./reverse-proxy/conf:/etc/nginx

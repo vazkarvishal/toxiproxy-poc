@@ -38,11 +38,14 @@
 }
 
 .cbheader, .cbfooter {
-  height: 10vh;
+  height: 140px;
   background-color:rebeccapurple ;
 }
 
+.cbfooter {
+  margin-top: 60px;
+}
+
 .cbcontainer {
-  height: 50vh;
   margin: 0px auto;
 }

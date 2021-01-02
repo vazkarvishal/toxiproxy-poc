@@ -13,7 +13,7 @@ origins = [
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -27,9 +27,7 @@ def read_root():
 @app.get("/recipes")
 def read_recipe():
 
-  recipe_collection = {
-    
-    "vegetarian_recipes": [
+  recipe_collection = [
       {
         "name": "paneer biryani",
         "cooking_time": "20 minutes"
@@ -45,9 +43,7 @@ def read_recipe():
       {
         "name": "oakra",
         "cooking_time": "35 minutes"
-      }
-    ],
-    "non_vegetarian_recipes": [
+      },
       {
         "name": "chicken biryani",
         "cooking_time": "50 minutes"
@@ -64,6 +60,5 @@ def read_recipe():
         "name": "fish pakora",
         "cooking_time": "35 minutes"
       }
-    ]
-  }
+  ]
   return recipe_collection
