@@ -4,6 +4,7 @@ services:
     build: ./toxic-ui
     volumes:
       - ./toxic-ui:/app
+      - /app/node_modules
     ports:
       - "3000:3000"
 

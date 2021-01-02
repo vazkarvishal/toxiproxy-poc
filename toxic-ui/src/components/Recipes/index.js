@@ -25,7 +25,7 @@ class Recipes extends React.Component {
         'Access-Control-Allow-Origin': "*",
         'Content-Type': "application/json"
       },
-      timeout: 3000
+      timeout: 6000
     })
 
     instance.get('/recipes', {headers: {'Content-Type': 'application/x-www-form-urlencoded'}})
