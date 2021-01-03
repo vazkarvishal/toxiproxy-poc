@@ -1,6 +1,8 @@
 # toxiproxy-test
 An end to end containerised test of using toxiproxy for chaos engineering tests. The purpose of this repository is to test shopifys toxiproxy as a sidecar to our applications and inject failure to identify resiliency bottlenecks.
 
+![setup diagram](./images/toxiproxypoc.jpg)
+
 ## What does this repo include?
 This repository is a bundle comprised of:
 - Reverse Proxy built with nginx
