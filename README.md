@@ -38,3 +38,41 @@ Once this is done, you can change the Axios API call in the UI configured in `/t
 ---
 ## How to test the application?
 The application has been setup to use Axios to make the get request to the API. The Axios initialisation has a timeout of 3 seconds configured. The intent of this project is to remove the timeout from this call to demonstrate how latencies can be left undetected and found using the toxic behaviour and then adding the timeouts back to explain how our Engineering teams should be developing with failure in mind at all times.
+
+---
+## Examples of working application with and without the proxy
+**Working UI** which can be accessed on `localhost` using port `80` ![Working UI](./images/working-ui.png)
+
+The below image shows how our UI has been configured to directly call the API to simulate a realworld scenario.
+![Direct API Call](./images/direct-api-call.png)
+
+When invoked from the browser, below image shows call without toxic behaviour.
+![Without toxi](./images/ui-without-toxic.png)
+
+Now we will docker exec into the toxi-proxy container and enable the proxy and add the toxic behaviour, following which we will change the UI to now point to the toxic proxy.
+![Enable toxiproxy](./images/enable-toxi.png)
+
+The below image shows how our UI has now been **updated** to call the API via the proxy path to simulate a realworld scenario.
+![Direct API Call](./images/toxic-api-call.png)
+
+Now lets make the UI call again 🚧
+![UI delayed response](./images/toxic-delay.png)
+
+Now let us add a circuit breaker timeout of 2 seconds to the UI as shown below (in the component index.js file):
+```javascript
+const instance = axios.create({
+      baseURL: "http://localhost/toxic-api",
+      headers: { 
+        'Access-Control-Allow-Origin': "*",
+        'Content-Type': "application/json"
+      },
+      timeout: 2000
+    })
+```
+Make a UI call to see if the circuit breaker worked.
+![curcuit breaker](./images/circuitbreaker.png)
+
+## Conclusion
+This is how we can make use of toxiproxy to inject different failures into our applications without having to make many changes to our application and simply adding the toxic behaviour as sidecar to the pod/container environment.
+
+Thankyou!
