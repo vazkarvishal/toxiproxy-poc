@@ -26,7 +26,14 @@ The API is exposing a single endpoint `/recipes` which is consumed by the React 
 
 ---
 ## How to create toxics and/or add toxicity?
-The toxyproxy is currently not configured to automatically configure the proxy and the toxic behaviour. You need to exec into the container once it is up and running after using the `docker-compose up` command and run the below commands to enable the toxiproxy. Once this is done, you can change the Axios API call in the UI configured in `/toxic-ui/src/components/recipes/index.js` on line 23 to use the `/toxic-api` path instead of the direct `/api` path
+The toxyproxy is currently not configured to automatically configure the proxy and the toxic behaviour. You need to exec into the container once it is up and running after using the `docker-compose up` command and run the below commands to enable the toxiproxy. 
+```bash
+cd /go/toxiproxy
+./toxiproxy-cli create httpproxy -listen 0.0.0.0:8000 --upstream api:8000
+./toxiproxy-cli toxic add httpproxy -type latency --attribute latency=5000
+./toxiproxy-cli list
+```
+Once this is done, you can change the Axios API call in the UI configured in `/toxic-ui/src/components/recipes/index.js` on line 23 to use the `/toxic-api` path instead of the direct `/api` path
 
 ---
 ## How to test the application?
